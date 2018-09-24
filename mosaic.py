@@ -10,11 +10,6 @@ except ImportError:
     print "Easy Selector! Please install mediainfo and pymediainfo first!\n\nFor example:\n\nsudo apt snstall mediainfo\nsudo pip install pymediainfo\n"
     exit(1)
 
-try:
-    import ifaddr
-except ImportError:                                                                                                                                                                                                                    
-    print "Blimey! Please install ifaddr!\n\nFor example:\n\nsudo pip install ifaddr\n"
-    exit(1)
 
 parser = argparse.ArgumentParser(description='Create a 3x6 mosaic from a UDP TS stream')
 parser.add_argument('multicastIP', help='The input multicast address')
@@ -25,15 +20,6 @@ parsed_args = parser.parse_args()
 
 print "About to start mosaic from {} from services {}..".format(parsed_args.multicastIP, ','.join(parsed_args.serviceNames))
 
-def get_ip_from_interface(interfaceName):
-
-    adapters = ifaddr.get_adapters()
-    
-    for i in adapters:
-        if i.name == interfaceName:
-            interfaceIP = i.ips[0].ip
-        
-    return interfaceIP
 
 def capture_ts(interfaceIP, multicastIP, multicastPort):
 
